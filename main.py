@@ -19,9 +19,10 @@ def get_raw_html(raw_link):
             print "WARN: Request did not come back with OK status code for: %s \nExiting" % raw_link
             exit(1)
         raw_html = r.text
-    except Exception e:
+    except Exception:
         print "ERR: Request threw an error: %s \nReturning" % raw_link
         print traceback.format_exc()
+        time.sleep(random.random() * 3)
         return ""
     return raw_html
 
@@ -29,7 +30,7 @@ def get_raw_html(raw_link):
 def get_listing_url(search_link):
     #looks on a result result page, and returns a set() containing individuals ads.
     #will return empty set if no more ads are found.
-    location_tag = search_link.split("search")[0]
+    location_tag = search_link.split("search/")[0]
     ad_links = set()
     raw_html = get_raw_html(search_link)
     bt_struct = BeautifulSoup(raw_html, "html.parser")
