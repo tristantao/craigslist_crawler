@@ -6,15 +6,23 @@ import requests
 from datetime import date
 import pdb
 import random
+import traceback
 
 def get_raw_html(raw_link):
     #returns the raw html of a page, errors and exits if request doesn't go through
+    #Will return emptry string IF an issue comes up
     print "[STATUS] Scraping {0}".format(raw_link)
-    r = requests.get(raw_link)
-    if (r.status_code != requests.codes.ok):
-        print "WARN: Request did not come back with OK status code for: %s \nExiting" % raw_link
-        exit(1)
-    raw_html = r.text
+
+    try:
+        r = requests.get(raw_link)
+        if (r.status_code != requests.codes.ok):
+            print "WARN: Request did not come back with OK status code for: %s \nExiting" % raw_link
+            exit(1)
+        raw_html = r.text
+    except Exception e:
+        print "ERR: Request threw an error: %s \nReturning" % raw_link
+        print traceback.format_exc()
+        return ""
     return raw_html
 
 
