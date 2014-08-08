@@ -53,7 +53,6 @@ def crawl_and_output(ad_links, output_prefix, folder):
 
 
 if __name__ == '__main__':
-    search_term = sys.argv[1]
     REGIONS = ['losangeles', 'sfbay']
     SEARCH_TERM = 'motorcycle'
     MIN_PRICE = 0
@@ -62,9 +61,9 @@ if __name__ == '__main__':
     CURRENT_PAGE = 0
 
     while True:
-        search_url = generate_search_url(REGIONS[0], CURRENT_PAGE, SEARCH_TERM, MIN_PRICE, MAX_PRICE)
+        search_url = generate_search_url(REGIONS[1], CURRENT_PAGE, SEARCH_TERM, MIN_PRICE, MAX_PRICE)
         ad_links = get_listing_url(search_url)
-        crawl_and_output(ad_links, OUTPUT_PREFIX, 'data')
+        crawl_and_output(ad_links, OUTPUT_PREFIX, 'data/sfbay/')
 
         if len(ad_links) == 0:
             CURRENT_PAGE = 0
