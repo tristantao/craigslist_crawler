@@ -48,17 +48,22 @@ def crawl_and_output(ad_links, output_prefix, folder):
     #ad_links is a set() of links to individual ads.
     #output_prefix is the prefix of the file that gets outputted.
     for ad in ad_links:
-        output_id = ad.split("org/")[1].replace('.html' ,'').replace('/', '_')
-        output_path = os.path.join(os.getcwd(), folder, (output_prefix+output_id))
+        try:
+            output_id = ad.split("org/")[1].replace('.html' ,'').replace('/', '_')
+            output_path = os.path.join(os.getcwd(), folder, (output_prefix+output_id))
 
-        f = open(output_path, 'w')
-        raw_html = get_raw_html(ad)
-        bt_struct = BeautifulSoup(raw_html, "html.parser")
-        body = bt_struct.find('section', {'id': 'postingbody'})
-        #pdb.set_trace()
-        f.write(str(body))
-        f.close()
-        time.sleep(random.randint(50, 250) / 1000.0)
+            f = open(output_path, 'w')
+            raw_html = get_raw_html(ad)
+            bt_struct = BeautifulSoup(raw_html, "html.parser")
+            body = bt_struct.find('section', {'id': 'postingbody'})
+            #pdb.set_trace()
+            f.write(str(body))
+            f.close()
+            time.sleep(random.randint(50, 250) / 1000.0)
+        except Exception:
+            print traceback.format_exc()
+            pdb.set_trace()
+
 
 
 if __name__ == '__main__':
@@ -67,7 +72,7 @@ if __name__ == '__main__':
     MIN_PRICE = 0
     MAX_PRICE = 0
     OUTPUT_PREFIX = 'moto'
-    CURRENT_PAGE = 0
+    CURRENT_PAGE = 2200
 
     while True:
         search_url = generate_search_url(REGIONS[1], CURRENT_PAGE, SEARCH_TERM, MIN_PRICE, MAX_PRICE)
