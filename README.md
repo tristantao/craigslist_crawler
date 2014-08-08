@@ -9,8 +9,8 @@ run via
 
 Issues:
 
-    *Sometimes BS crashes with infinite recursion (probably a BS issue)
-    *Sometimes connectino gets reset, we just ignore and conitnue.
+    * Sometimes BS crashes with infinite recursion (probably a BS issue)
+    * Sometimes connectino gets reset, we just ignore and conitnue.
 
 
 
