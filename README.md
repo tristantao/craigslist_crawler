@@ -13,4 +13,4 @@ Issues:
     * Sometimes connectino gets reset, we just ignore and conitnue.
 
 
-
+We also stop crawling past result 2500, since craiglist stops you looking past it anyways (without having to go through some extra hoop).
