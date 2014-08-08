@@ -79,7 +79,7 @@ if __name__ == '__main__':
         ad_links = get_listing_url(search_url)
         crawl_and_output(ad_links, OUTPUT_PREFIX, 'data/sfbay/')
 
-        if len(ad_links) == 0:
+        if len(ad_links) == 0 || CURRENT_PAGE > 2600:
             CURRENT_PAGE = 0
             break
         else:
